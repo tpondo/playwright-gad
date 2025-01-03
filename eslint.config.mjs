@@ -1,20 +1,22 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-
+import globals from 'globals';
+import pluginJs from '@eslint/js';
+import tseslint from 'typescript-eslint';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
-  {ignores: ['package-lock.json',
-   ' playwright-report/**',
-    'test-results/**']},
-  {files: ["**/*.{ts}"]},
-  {languageOptions: { globals: globals.node }},
+  {
+    ignores: ['package-lock.json', ' playwright-report/**', 'test-results/**'],
+  },
+  { files: ['**/*.{ts}'] },
+  { languageOptions: { globals: globals.node } },
   pluginJs.configs.recommended,
   {
     rules: {
       'no-console': 'error',
-    }
+      '@typescript-eslint/explicit-function-return-type': 'error',
+    },
   },
   ...tseslint.configs.recommended,
+  eslintPluginPrettierRecommended,
 ];
