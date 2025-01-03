@@ -22,15 +22,15 @@ export default [
   eslintPluginPlaywright.configs['flat/recommended'],
   {
     rules: {
-      'playwright/no-nested-step': 'off'
+      'playwright/no-nested-step': 'off',
     },
     settings: {
       playwright: {
         globalAliases: {
           test: ['setup'],
-        }
-      }
-    }
+        },
+      },
+    },
   },
   eslintPluginPrettierRecommended,
 ];
