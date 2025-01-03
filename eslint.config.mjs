@@ -2,6 +2,7 @@ import globals from 'globals';
 import pluginJs from '@eslint/js';
 import tseslint from 'typescript-eslint';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import eslintPluginPlaywright from 'eslint-plugin-playwright';
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -18,5 +19,18 @@ export default [
     },
   },
   ...tseslint.configs.recommended,
+  eslintPluginPlaywright.configs['flat/recommended'],
+  {
+    rules: {
+      'playwright/no-nested-step': 'off'
+    },
+    settings: {
+      playwright: {
+        globalAliases: {
+          test: ['setup'],
+        }
+      }
+    }
+  },
   eslintPluginPrettierRecommended,
 ];
