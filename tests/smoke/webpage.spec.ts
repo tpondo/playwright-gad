@@ -1,8 +1,9 @@
 import { test, expect } from '../../fixtures/fixtures';
+import { pageTitle } from '../../test-data/page-title/page-title.data';
 
 test.describe('Verify service main pages', () => {
   test(
-    'Home page title',
+    'home page title',
     {
       tag: '@smoke',
       annotation: { type: 'documentation', description: 'GAD-R01-01' },
@@ -11,12 +12,12 @@ test.describe('Verify service main pages', () => {
       await homePage.goto();
 
       const title = await homePage.title();
-      expect(title).toContain('GAD');
+      expect(title).toContain(pageTitle.mainPage);
     },
   );
 
   test(
-    'Articles page title',
+    'articles page title',
     {
       tag: '@smoke',
       annotation: { type: 'documentation', description: 'GAD-R01-02' },
@@ -25,12 +26,12 @@ test.describe('Verify service main pages', () => {
       await articlesPage.goto();
 
       const title = await articlesPage.title();
-      expect(title).toContain('Articles');
+      expect(title).toContain(pageTitle.articlesPage);
     },
   );
 
   test(
-    'Comments page title',
+    'comments page title',
     {
       tag: '@smoke',
       annotation: { type: 'documentation', description: 'GAD-R01-02' },
@@ -39,7 +40,7 @@ test.describe('Verify service main pages', () => {
       await commentsPage.goto();
 
       const title = await commentsPage.title();
-      expect(title).toContain('Comments');
+      expect(title).toContain(pageTitle.commentsPage);
     },
   );
 });
