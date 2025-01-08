@@ -3,6 +3,7 @@ import { BasePage } from '../base/base.page';
 
 export class LoginPage extends BasePage {
   url: string = '/login/';
+  loginError = (): Locator => this.page.getByTestId('login-error');
   emailInput = (): Locator => this.page.locator('input#username');
   passwordInput = (): Locator => this.page.locator('input#password');
   loginButton = (): Locator => this.page.locator('#loginButton');

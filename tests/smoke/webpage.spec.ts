@@ -26,7 +26,7 @@ test.describe('Verify service main pages', () => {
       await articlesPage.goto();
 
       const title = await articlesPage.title();
-      expect(title).toContain(pageTitle.articlesPage);
+      expect(title).toContain(pageTitle.articles);
     },
   );
 
@@ -40,7 +40,7 @@ test.describe('Verify service main pages', () => {
       await commentsPage.goto();
 
       const title = await commentsPage.title();
-      expect(title).toContain(pageTitle.commentsPage);
+      expect(title).toContain(pageTitle.comments);
     },
   );
 });
