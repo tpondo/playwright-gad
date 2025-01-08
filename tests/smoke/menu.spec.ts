@@ -1,5 +1,5 @@
 import { test, expect } from '../../fixtures/fixtures';
-import { pageTitle } from '../../test-data/page-title/page-title.data';
+import { pageTitle } from '../../src/test-data/page-title/page-title.data';
 
 test.describe('Verify navigation through menu', () => {
   test(
