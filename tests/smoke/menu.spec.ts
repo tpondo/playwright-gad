@@ -13,7 +13,7 @@ test.describe('Verify navigation through menu', () => {
       await articlesPage.mainMenu.commentsButton().click();
 
       const title = await commentsPage.title();
-      expect(title).toContain(pageTitle.commentsPage);
+      expect(title).toContain(pageTitle.comments);
     },
   );
 
@@ -28,7 +28,7 @@ test.describe('Verify navigation through menu', () => {
       await commentsPage.mainMenu.articlesButton().click();
 
       const title = await articlesPage.title();
-      expect(title).toContain(pageTitle.articlesPage);
+      expect(title).toContain(pageTitle.articles);
     },
   );
 
