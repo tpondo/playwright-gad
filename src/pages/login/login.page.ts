@@ -1,5 +1,6 @@
 import { Locator } from '@playwright/test';
 import { BasePage } from '../base/base.page';
+import { LoginUser } from '../../models/user/user.model';
 
 export class LoginPage extends BasePage {
   url: string = '/login/';
@@ -8,9 +9,9 @@ export class LoginPage extends BasePage {
   passwordInput = (): Locator => this.page.locator('input#password');
   loginButton = (): Locator => this.page.locator('#loginButton');
 
-  async login(email: string, password: string): Promise<void> {
-    await this.emailInput().fill(email);
-    await this.passwordInput().fill(password);
+  async login(loginData: LoginUser): Promise<void> {
+    await this.emailInput().fill(loginData.userEmail);
+    await this.passwordInput().fill(loginData.userPassword);
     await this.loginButton().click();
     await this.page.waitForLoadState();
   }
