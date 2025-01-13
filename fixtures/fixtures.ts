@@ -4,6 +4,7 @@ import { ArticlesPage } from '../src/pages/articles/articles.page';
 import { CommentsPage } from '../src/pages/comments/comments.page';
 import { LoginPage } from '../src/pages/login/login.page';
 import { WelcomePage } from '../src/pages/welcome/welcome.page';
+import { RegisterPage } from '../src/pages/register/register.page';
 
 type MyType = {
   homePage: HomePage;
@@ -11,6 +12,7 @@ type MyType = {
   commentsPage: CommentsPage;
   loginPage: LoginPage;
   welcomePage: WelcomePage;
+  registerPage: RegisterPage;
 };
 
 export const test = base.extend<MyType>({
@@ -28,6 +30,9 @@ export const test = base.extend<MyType>({
   },
   welcomePage: async ({ page }, use) => {
     await use(new WelcomePage(page));
+  },
+  registerPage: async ({ page }, use) => {
+    await use(new RegisterPage(page));
   },
 });
 
