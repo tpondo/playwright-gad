@@ -4,6 +4,11 @@ import { RegisterUser } from '../../src/models/user/user.model';
 import { pageTitle } from '../../src/test-data/page-title/page-title.data';
 
 test.describe('Verify register', () => {
+  let registerUserData: RegisterUser;
+  test.beforeEach(async ({ registerPage }) => {
+    registerUserData = randomUserData();
+    await registerPage.goto();
+  });
   test(
     'register user with correct data',
     {
@@ -14,9 +19,6 @@ test.describe('Verify register', () => {
       },
     },
     async ({ registerPage, loginPage, welcomePage }) => {
-      const registerUserData: RegisterUser = randomUserData();
-
-      await registerPage.goto();
       await registerPage.registerUser(registerUserData);
       await loginPage.login(registerUserData);
 
@@ -36,10 +38,8 @@ test.describe('Verify register', () => {
     async ({ registerPage }) => {
       const expectedErrorText: string = 'Please provide a valid email address';
       const incorrectEmail: string = '!@#';
-      const registerUserData: RegisterUser = randomUserData();
       registerUserData.userEmail = incorrectEmail;
 
-      await registerPage.goto();
       await registerPage.registerUser(registerUserData);
 
       await expect(registerPage.emailErrorText()).toHaveText(expectedErrorText);
@@ -56,9 +56,7 @@ test.describe('Verify register', () => {
     },
     async ({ registerPage, page }) => {
       const expectedErrorText: string = 'This field is required';
-      const registerUserData: RegisterUser = randomUserData();
 
-      await registerPage.goto();
       await registerPage
         .userFirstNameInput()
         .fill(registerUserData.userFirstName);
