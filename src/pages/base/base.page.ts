@@ -12,4 +12,12 @@ export class BasePage {
   async title(): Promise<string> {
     return this.page.title();
   }
+
+  async waitForUrlToBeLoaded(): Promise<void> {
+    await this.page.waitForURL(this.url);
+  }
+
+  async acceptDialogPopup(): Promise<void> {
+    this.page.on('dialog', async (dialog) => await dialog.accept());
+  }
 }

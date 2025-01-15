@@ -12,11 +12,12 @@ test.describe('Verify articles', () => {
     await articlesPage.goto();
     await articlesPage.addArticleButtonLogged().click();
   });
+
   test(
     'create new article',
     {
       tag: '@smoke',
-      annotation: { type: 'documentation', description: 'GAD-R02-01' },
+      annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
     async ({ addArticleView, articlePage }) => {
       const article: AddArticleModel = randomNewArticleData();
