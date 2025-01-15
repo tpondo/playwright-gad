@@ -6,7 +6,9 @@ export function randomNewArticleData(
   bodyParagraphs: number = 5,
 ): AddArticleModel {
   const newArticle: AddArticleModel = {
-    title: faker.string.alpha(titleLength) ?? faker.lorem.sentence(),
+    title: titleLength
+      ? faker.string.alpha(titleLength)
+      : faker.lorem.sentence(),
     body: faker.lorem.paragraph(bodyParagraphs),
   };
 
