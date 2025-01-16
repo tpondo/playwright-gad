@@ -1,11 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
+import { BASE_URL } from './src/global-setup';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
   testDir: './tests',
-  globalSetup: require.resolve('./src/global-setup.ts'),
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: true,
@@ -13,7 +13,7 @@ export default defineConfig({
   workers: undefined,
   reporter: 'html',
   use: {
-    baseURL: process.env.BASE_URL,
+    baseURL: BASE_URL,
     actionTimeout: 0,
     trace: 'retain-on-failure',
     video: 'retain-on-failure',
