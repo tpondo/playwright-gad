@@ -1,12 +1,12 @@
 import { test, expect } from '../../fixtures/fixtures';
-import { randomUserData } from '../../src/factories/user/user.factory';
-import { RegisterUser } from '../../src/models/user/user.model';
+import { prepareRandomUserData } from '../../src/factories/user/user.factory';
+import { RegisterUserModel } from '../../src/models/user/user.model';
 import { pageTitle } from '../../src/test-data/page-title/page-title.data';
 
 test.describe('Verify register', () => {
-  let registerUserData: RegisterUser;
+  let registerUserData: RegisterUserModel;
   test.beforeEach(async ({ registerPage }) => {
-    registerUserData = randomUserData();
+    registerUserData = prepareRandomUserData();
     await registerPage.goto();
   });
   test(
@@ -22,7 +22,7 @@ test.describe('Verify register', () => {
       await registerPage.registerUser(registerUserData);
       await loginPage.login(registerUserData);
 
-      const title = await welcomePage.title();
+      const title = await welcomePage.getTitle();
       expect(title).toContain(pageTitle.welcome);
     },
   );
