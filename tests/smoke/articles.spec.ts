@@ -1,5 +1,5 @@
 import { expect, test } from '../../fixtures/fixtures';
-import { randomNewArticleData } from '../../src/factories/article/article.factory';
+import { prepareRandomArticle } from '../../src/factories/article/article.factory';
 import { AddArticleModel } from '../../src/models/article/article.model';
 import { testUser1 } from '../../src/test-data/user-data/user-data';
 
@@ -20,7 +20,7 @@ test.describe('Verify articles', () => {
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
     async ({ addArticleView, articlePage }) => {
-      const article: AddArticleModel = randomNewArticleData();
+      const article: AddArticleModel = prepareRandomArticle();
       await addArticleView.addArticle(article);
 
       await expect.soft(articlePage.articleTitle()).toHaveText(article.title);
@@ -37,7 +37,7 @@ test.describe('Verify articles', () => {
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
     async ({ addArticleView }) => {
-      const article: AddArticleModel = randomNewArticleData();
+      const article: AddArticleModel = prepareRandomArticle();
 
       await addArticleView.bodyTextarea().fill(article.body);
       await addArticleView.saveButton().click();
@@ -56,7 +56,7 @@ test.describe('Verify articles', () => {
       annotation: { type: 'documentation', description: 'GAD-R04-02' },
     },
     async ({ addArticleView }) => {
-      const article: AddArticleModel = randomNewArticleData(129);
+      const article: AddArticleModel = prepareRandomArticle(129);
 
       await addArticleView.addArticle(article);
 
@@ -74,7 +74,7 @@ test.describe('Verify articles', () => {
       annotation: { type: 'documentation', description: 'GAD-R04-02' },
     },
     async ({ addArticleView, articlePage }) => {
-      const article: AddArticleModel = randomNewArticleData(128);
+      const article: AddArticleModel = prepareRandomArticle(128);
 
       await addArticleView.addArticle(article);
 

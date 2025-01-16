@@ -15,7 +15,7 @@ test.describe('Verify login', () => {
       await loginPage.goto();
       await loginPage.login(testUser1);
 
-      const title = await welcomePage.title();
+      const title = await welcomePage.getTitle();
       expect(title).toContain(pageTitle.welcome);
     },
   );
@@ -31,7 +31,7 @@ test.describe('Verify login', () => {
         userEmail: testUser1.userEmail,
         userPassword: faker.internet.password(),
       });
-      const title = await loginPage.title();
+      const title = await loginPage.getTitle();
 
       await expect.soft(loginPage.loginError()).toHaveText(expectedLoginError);
       expect.soft(title).toContain(pageTitle.login);
@@ -49,7 +49,7 @@ test.describe('Verify login', () => {
         userEmail: 'incorrectEmail',
         userPassword: testUser1.userPassword,
       });
-      const title = await loginPage.title();
+      const title = await loginPage.getTitle();
 
       await expect.soft(loginPage.loginError()).toHaveText(expectedLoginError);
       expect.soft(title).toContain(pageTitle.login);

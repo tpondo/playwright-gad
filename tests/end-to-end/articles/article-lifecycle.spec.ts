@@ -1,5 +1,5 @@
 import { test, expect } from '../../../fixtures/fixtures';
-import { randomNewArticleData } from '../../../src/factories/article/article.factory';
+import { prepareRandomArticle } from '../../../src/factories/article/article.factory';
 import { AddArticleModel } from '../../../src/models/article/article.model';
 import { pageTitle } from '../../../src/test-data/page-title/page-title.data';
 import { testUser1 } from '../../../src/test-data/user-data/user-data';
@@ -19,7 +19,7 @@ test.describe('Verify article lifecycle', () => {
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
     async ({ addArticleView, articlesPage, articlePage }) => {
-      article = randomNewArticleData();
+      article = prepareRandomArticle();
 
       await articlesPage.addArticleButtonLogged().click();
       await addArticleView.addArticle(article);
@@ -56,7 +56,7 @@ test.describe('Verify article lifecycle', () => {
       await articlePage.deleteArticle();
       await articlesPage.waitForUrlToBeLoaded();
 
-      const title = await articlesPage.title();
+      const title = await articlesPage.getTitle();
       expect.soft(title).toContain(pageTitle.articles);
     },
   );
@@ -67,9 +67,12 @@ test.describe('Verify article lifecycle', () => {
       annotation: { type: 'documentation', description: 'GAD-R04-03' },
     },
     async ({ articlesPage }) => {
+      const expectedNoArticleData: string = 'No data';
       await articlesPage.searchArticle(article.title);
 
-      await expect.soft(articlesPage.noResultsText()).toHaveText('No data');
+      await expect
+        .soft(articlesPage.noResultsText())
+        .toHaveText(expectedNoArticleData);
     },
   );
 });
