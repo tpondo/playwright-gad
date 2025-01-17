@@ -1,7 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import { AddCommentModel } from '../../models/comment/add-comment.model';
 
-export class EditArticleComment {
+export class EditArticleCommentView {
   commentTextArea = (): Locator => this.page.getByTestId('body-input');
   updateCommentButton = (): Locator => this.page.getByTestId('update-button');
 
