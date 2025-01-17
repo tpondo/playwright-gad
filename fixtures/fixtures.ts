@@ -5,8 +5,11 @@ import { CommentsPage } from '../src/pages/comments/comments.page';
 import { LoginPage } from '../src/pages/login/login.page';
 import { WelcomePage } from '../src/pages/welcome/welcome.page';
 import { RegisterPage } from '../src/pages/register/register.page';
-import { AddArticleView } from '../src/views/add-article.view';
+import { AddArticleView } from '../src/views/article/add-article.view';
+import { AddNewArticleComment } from '../src/views/article/add-new-article-comment.view';
 import { ArticlePage } from '../src/pages/articles/article.page';
+import { CommentPage } from '../src/pages/comments/comment.page';
+import { EditArticleComment } from '../src/views/article/edit-article-comment.view';
 
 type MyType = {
   homePage: HomePage;
@@ -17,6 +20,9 @@ type MyType = {
   registerPage: RegisterPage;
   addArticleView: AddArticleView;
   articlePage: ArticlePage;
+  addNewArticleComment: AddNewArticleComment;
+  commentPage: CommentPage;
+  editArticleComment: EditArticleComment;
 };
 
 export const test = base.extend<MyType>({
@@ -43,6 +49,15 @@ export const test = base.extend<MyType>({
   },
   articlePage: async ({ page }, use) => {
     await use(new ArticlePage(page));
+  },
+  addNewArticleComment: async ({ page }, use) => {
+    await use(new AddNewArticleComment(page));
+  },
+  commentPage: async ({ page }, use) => {
+    await use(new CommentPage(page));
+  },
+  editArticleComment: async ({ page }, use) => {
+    await use(new EditArticleComment(page));
   },
 });
 

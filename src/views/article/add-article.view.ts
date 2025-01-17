@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { AddArticleModel } from '../models/article/article.model';
+import { AddArticleModel } from '../../models/article/article.model';
 
 export class AddArticleView {
   titleInput = (): Locator => this.page.getByTestId('title-input');
@@ -8,6 +8,7 @@ export class AddArticleView {
   alertPopup = (): Locator => this.page.getByTestId('alert-popup');
   addNewEntryHeader = (): Locator =>
     this.page.getByRole('heading', { name: 'Add New Entry' });
+
   constructor(private page: Page) {}
 
   async addArticle(article: AddArticleModel): Promise<void> {

@@ -49,7 +49,7 @@ test.describe('Verify article lifecycle', () => {
     'user can delete his own article',
     {
       tag: '@e2e',
-      annotation: { type: 'documentation', description: 'GAD-R04-03' },
+      annotation: { type: 'documentation', description: 'GAD-R04-04' },
     },
     async ({ articlePage, articlesPage }) => {
       await articlesPage.goToArticle(article.title);
@@ -64,7 +64,7 @@ test.describe('Verify article lifecycle', () => {
     'user can not find deleted article',
     {
       tag: '@e2e',
-      annotation: { type: 'documentation', description: 'GAD-R04-03' },
+      annotation: { type: 'documentation', description: 'GAD-R04-04' },
     },
     async ({ articlesPage }) => {
       const expectedNoArticleData: string = 'No data';
