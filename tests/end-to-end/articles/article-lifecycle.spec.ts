@@ -1,7 +1,7 @@
-import { test, expect } from '../../../fixtures/fixtures';
-import { prepareRandomArticle } from '../../../src/factories/article/article.factory';
-import { AddArticleModel } from '../../../src/models/article/article.model';
-import { pageTitle } from '../../../src/test-data/page-title/page-title.data';
+import { test, expect } from '@_fixtures/fixtures';
+import { prepareRandomArticle } from '@_src/factories/article/article.factory';
+import { AddArticleModel } from '@_src/models/article/article.model';
+import { pageTitle } from '@_src/test-data/page-title/page-title.data';
 
 test.describe.configure({ mode: 'serial' });
 test.describe('Verify article lifecycle', () => {

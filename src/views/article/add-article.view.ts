@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { AddArticleModel } from '../../models/article/article.model';
+import { AddArticleModel } from '@_src/models/article/article.model';
 
 export class AddArticleView {
   titleInput = (): Locator => this.page.getByTestId('title-input');

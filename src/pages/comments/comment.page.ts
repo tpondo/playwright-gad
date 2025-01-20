@@ -1,7 +1,7 @@
 //import { Page } from '@playwright/test';
 
 import { Locator } from '@playwright/test';
-import { BasePage } from '../base/base.page';
+import { BasePage } from '@_src/pages/base/base.page';
 
 export class CommentPage extends BasePage {
   url = '/comment.html';

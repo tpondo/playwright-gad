@@ -1,6 +1,6 @@
-import { expect, test } from '../../fixtures/fixtures';
-import { prepareRandomArticle } from '../../src/factories/article/article.factory';
-import { AddArticleModel } from '../../src/models/article/article.model';
+import { expect, test } from '@_fixtures/fixtures';
+import { prepareRandomArticle } from '@_src/factories/article/article.factory';
+import { AddArticleModel } from '@_src/models/article/article.model';
 
 test.describe('Verify articles', () => {
   const expectedErrorMessage: string = 'Article was not created';

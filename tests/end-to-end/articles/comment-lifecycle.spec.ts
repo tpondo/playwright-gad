@@ -1,9 +1,9 @@
-import { test, expect } from '../../../fixtures/fixtures';
-import { prepareRandomArticle } from '../../../src/factories/article/article.factory';
-import { AddArticleModel } from '../../../src/models/article/article.model';
-import { ArticleComment } from '../../../src/pages/articles/article.page';
-import { prepareRandomCommentData } from '../../../src/factories/comment/comment.factory';
-import { AddCommentModel } from '../../../src/models/comment/add-comment.model';
+import { test, expect } from '@_fixtures/fixtures';
+import { prepareRandomArticle } from '@_src/factories/article/article.factory';
+import { AddArticleModel } from '@_src/models/article/article.model';
+import { ArticleComment } from '@_src/pages/articles/article.page';
+import { prepareRandomCommentData } from '@_src/factories/comment/comment.factory';
+import { AddCommentModel } from '@_src/models/comment/add-comment.model';
 
 test.describe('Verify article lifecycle', () => {
   let article: AddArticleModel;

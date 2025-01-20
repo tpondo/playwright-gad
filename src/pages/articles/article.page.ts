@@ -1,6 +1,6 @@
 import { Locator } from '@playwright/test';
-import { BasePage } from '../base/base.page';
-import { AddCommentModel } from '../../models/comment/add-comment.model';
+import { BasePage } from '@_src/pages/base/base.page';
+import { AddCommentModel } from '@_src/models/comment/add-comment.model';
 
 export interface ArticleComment {
   body: Locator;

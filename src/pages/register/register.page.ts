@@ -1,6 +1,6 @@
 import { Locator } from '@playwright/test';
-import { BasePage } from '../base/base.page';
-import { RegisterUserModel } from '../../models/user/user.model';
+import { BasePage } from '@_src/pages/base/base.page';
+import { RegisterUserModel } from '@_src/models/user/user.model';
 
 export class RegisterPage extends BasePage {
   url: string = 'register.html';
