@@ -12,7 +12,7 @@ test.describe('Verify register', () => {
   test(
     'register user with correct data',
     {
-      tag: '@smoke',
+      tag: '@integration',
       annotation: {
         type: 'documentation',
         description: 'GAD-R03-01,GAD-R03-03',
@@ -29,7 +29,7 @@ test.describe('Verify register', () => {
   test(
     'not register user with incorrect data - non valid email',
     {
-      tag: '@smoke',
+      tag: '@integration',
       annotation: {
         type: 'documentation',
         description: 'GAD-R03-04',
@@ -48,7 +48,7 @@ test.describe('Verify register', () => {
   test(
     'not register user with incorrect data - email not provided',
     {
-      tag: '@smoke',
+      tag: '@integration',
       annotation: {
         type: 'documentation',
         description: 'GAD-R03-04',

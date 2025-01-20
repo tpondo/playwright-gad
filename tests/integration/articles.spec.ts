@@ -13,7 +13,7 @@ test.describe('Verify articles', () => {
   test(
     'create new article',
     {
-      tag: ['@smoke', '@logged'],
+      tag: ['@integration', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
     async ({ addArticleView, articlePage }) => {
@@ -30,7 +30,7 @@ test.describe('Verify articles', () => {
   test(
     'new article can not be created without title',
     {
-      tag: ['@smoke', '@logged'],
+      tag: ['@integration', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
     async ({ addArticleView }) => {
@@ -49,7 +49,7 @@ test.describe('Verify articles', () => {
   test(
     'new article can not be created with title exceeding 128 signs',
     {
-      tag: ['@smoke', '@logged'],
+      tag: ['@integration', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-02' },
     },
     async ({ addArticleView }) => {
@@ -67,7 +67,7 @@ test.describe('Verify articles', () => {
   test(
     'new article can be created with title with 128 signs',
     {
-      tag: ['@smoke', '@logged'],
+      tag: ['@integration', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-02' },
     },
     async ({ addArticleView, articlePage }) => {

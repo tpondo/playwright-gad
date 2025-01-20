@@ -2,20 +2,17 @@ import { test, expect } from '../../../fixtures/fixtures';
 import { prepareRandomArticle } from '../../../src/factories/article/article.factory';
 import { AddArticleModel } from '../../../src/models/article/article.model';
 import { pageTitle } from '../../../src/test-data/page-title/page-title.data';
-import { testUser1 } from '../../../src/test-data/user-data/user-data';
 
 test.describe.configure({ mode: 'serial' });
 test.describe('Verify article lifecycle', () => {
   let article: AddArticleModel;
-  test.beforeEach(async ({ loginPage, articlesPage }) => {
-    await loginPage.goto();
-    await loginPage.login(testUser1);
+  test.beforeEach(async ({ articlesPage }) => {
     await articlesPage.goto();
   });
   test(
     'create new article',
     {
-      tag: '@e2e',
+      tag: ['@e2e', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
     async ({ addArticleView, articlesPage, articlePage }) => {
@@ -33,7 +30,7 @@ test.describe('Verify article lifecycle', () => {
   test(
     'user can access single article',
     {
-      tag: '@e2e',
+      tag: ['@e2e', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-03' },
     },
     async ({ articlesPage, articlePage }) => {
@@ -48,7 +45,7 @@ test.describe('Verify article lifecycle', () => {
   test(
     'user can delete his own article',
     {
-      tag: '@e2e',
+      tag: ['@e2e', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-04' },
     },
     async ({ articlePage, articlesPage }) => {
@@ -63,7 +60,7 @@ test.describe('Verify article lifecycle', () => {
   test(
     'user can not find deleted article',
     {
-      tag: '@e2e',
+      tag: ['@e2e', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-04' },
     },
     async ({ articlesPage }) => {

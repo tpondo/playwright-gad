@@ -8,7 +8,7 @@ test.describe('Verify login', () => {
   test(
     'reject login with incorrect password',
     {
-      tag: '@smoke',
+      tag: '@integration',
       annotation: { type: 'documentation', description: 'GAD-R02-01' },
     },
     async ({ loginPage }) => {
@@ -26,7 +26,7 @@ test.describe('Verify login', () => {
   test(
     'reject login with incorrect email',
     {
-      tag: '@smoke',
+      tag: '@integration',
       annotation: { type: 'documentation', description: 'GAD-R02-01' },
     },
     async ({ loginPage }) => {
