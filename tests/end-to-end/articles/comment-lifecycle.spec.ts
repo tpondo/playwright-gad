@@ -1,18 +1,15 @@
 import { test, expect } from '../../../fixtures/fixtures';
 import { prepareRandomArticle } from '../../../src/factories/article/article.factory';
 import { AddArticleModel } from '../../../src/models/article/article.model';
-import { testUser1 } from '../../../src/test-data/user-data/user-data';
 import { ArticleComment } from '../../../src/pages/articles/article.page';
 import { prepareRandomCommentData } from '../../../src/factories/comment/comment.factory';
 import { AddCommentModel } from '../../../src/models/comment/add-comment.model';
 
 test.describe('Verify article lifecycle', () => {
   let article: AddArticleModel;
-  test.beforeEach(async ({ loginPage, articlesPage, addArticleView }) => {
+  test.beforeEach(async ({ articlesPage, addArticleView }) => {
     article = prepareRandomArticle();
 
-    await loginPage.goto();
-    await loginPage.login(testUser1);
     await articlesPage.goto();
     await articlesPage.addArticleButtonLogged().click();
     await addArticleView.addArticle(article);
@@ -20,7 +17,7 @@ test.describe('Verify article lifecycle', () => {
   test(
     'create new comment',
     {
-      tag: '@e2e',
+      tag: ['@e2e', '@logged'],
       annotation: {
         type: 'documentation',
         description: 'GAD-R05-01,GAD-R05-02',

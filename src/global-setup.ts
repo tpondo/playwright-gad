@@ -1,15 +1,10 @@
-import * as dotenv from 'dotenv';
+import * as fs from 'fs';
+import { STORAGE_STATE } from '../playwright.config';
 
-dotenv.config({ override: true });
-
-function requireEnvVariable(envVariable: string): string {
-  const envVariableValue = process.env[envVariable];
-  if (envVariableValue === undefined) {
-    throw new Error(`Environment variable is not set ${envVariable}`);
+async function globalSetup(): Promise<void> {
+  if (fs.existsSync(STORAGE_STATE)) {
+    fs.unlinkSync(STORAGE_STATE);
   }
-  return envVariableValue;
 }
 
-export const BASE_URL = requireEnvVariable('BASE_URL');
-export const USER_EMAIL = requireEnvVariable('USER_EMAIL');
-export const USER_PASSWORD = requireEnvVariable('USER_PASSWORD');
+export default globalSetup;

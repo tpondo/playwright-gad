@@ -1,11 +1,15 @@
 import { defineConfig, devices } from '@playwright/test';
-import { BASE_URL } from './src/global-setup';
+import { BASE_URL } from './src/env.config';
+import * as path from 'path';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+export const STORAGE_STATE = path.join(__dirname, 'tmp/session.json');
+
 export default defineConfig({
   testDir: './tests',
+  globalSetup: 'src/global-setup.ts',
   timeout: 60_000,
   expect: { timeout: 10_000 },
   fullyParallel: true,
@@ -22,8 +26,25 @@ export default defineConfig({
 
   projects: [
     {
-      name: 'chromium',
+      name: 'chromium-non-logged',
+      grepInvert: /@logged/,
       use: { ...devices['Desktop Chrome'] },
+    },
+    {
+      name: 'setup',
+      testMatch: '**.setup.ts',
+      use: {
+        ...devices['Desktop Chrome'],
+      },
+    },
+    {
+      name: 'chromium-logged',
+      grep: /@logged/,
+      dependencies: ['setup'],
+      use: {
+        storageState: STORAGE_STATE,
+        ...devices['Desktop Chrome'],
+      },
     },
   ],
 });
