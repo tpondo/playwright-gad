@@ -1,14 +1,11 @@
 import { expect, test } from '../../fixtures/fixtures';
 import { prepareRandomArticle } from '../../src/factories/article/article.factory';
 import { AddArticleModel } from '../../src/models/article/article.model';
-import { testUser1 } from '../../src/test-data/user-data/user-data';
 
 test.describe('Verify articles', () => {
   const expectedErrorMessage: string = 'Article was not created';
 
-  test.beforeEach(async ({ loginPage, articlesPage }) => {
-    await loginPage.goto();
-    await loginPage.login(testUser1);
+  test.beforeEach(async ({ articlesPage }) => {
     await articlesPage.goto();
     await articlesPage.addArticleButtonLogged().click();
   });
@@ -16,7 +13,7 @@ test.describe('Verify articles', () => {
   test(
     'create new article',
     {
-      tag: '@smoke',
+      tag: ['@smoke', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
     async ({ addArticleView, articlePage }) => {
@@ -33,7 +30,7 @@ test.describe('Verify articles', () => {
   test(
     'new article can not be created without title',
     {
-      tag: '@smoke',
+      tag: ['@smoke', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
     async ({ addArticleView }) => {
@@ -52,7 +49,7 @@ test.describe('Verify articles', () => {
   test(
     'new article can not be created with title exceeding 128 signs',
     {
-      tag: '@smoke',
+      tag: ['@smoke', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-02' },
     },
     async ({ addArticleView }) => {
@@ -70,7 +67,7 @@ test.describe('Verify articles', () => {
   test(
     'new article can be created with title with 128 signs',
     {
-      tag: '@smoke',
+      tag: ['@smoke', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-02' },
     },
     async ({ addArticleView, articlePage }) => {

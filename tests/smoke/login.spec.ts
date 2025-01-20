@@ -6,20 +6,6 @@ import { testUser1 } from '../../src/test-data/user-data/user-data';
 test.describe('Verify login', () => {
   const expectedLoginError: string = 'Invalid username or password';
   test(
-    'successful login',
-    {
-      tag: '@smoke',
-      annotation: { type: 'documentation', description: 'GAD-R02-01' },
-    },
-    async ({ loginPage, welcomePage }) => {
-      await loginPage.goto();
-      await loginPage.login(testUser1);
-
-      const title = await welcomePage.getTitle();
-      expect(title).toContain(pageTitle.welcome);
-    },
-  );
-  test(
     'reject login with incorrect password',
     {
       tag: '@smoke',

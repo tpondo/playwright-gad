@@ -10,7 +10,8 @@
     "test": "npx playwright test",
     "test:headed": "npm run test -- --headed",
     "test:ui": "npm run test -- --ui",
-    "test:smoke": "npm run test -- --grep \"@smoke\"",
+    "test:smoke": "npm run test -- --grep \"@smoke\" --project 'chromium'",
+    "test:smoke:logged": "npm run test -- --grep \"@smoke\" --project 'logged'",
     "test:e2e": "npm run test -- --grep \"@e2e\"",
     "show-report": "npx playwright show-report"
   },
