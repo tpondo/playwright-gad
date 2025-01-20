@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import { STORAGE_STATE } from '../playwright.config';
+import { STORAGE_STATE } from '@_pw-config';
 
 async function globalSetup(): Promise<void> {
   if (fs.existsSync(STORAGE_STATE)) {

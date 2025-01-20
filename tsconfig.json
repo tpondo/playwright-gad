@@ -3,6 +3,13 @@
     "target": "ESNext",
     "strict": true,
     "module": "CommonJS",
-    "sourceMap": true
+    "sourceMap": true,
+    "baseUrl": ".",
+    "paths": {
+      "@_src/*": ["src/*"],
+      "@_pw-config": ["playwright.config.ts"],
+      "@_fixtures/*": ["fixtures/*"],
+      "@_env-config": ["config/env.config.ts"]
+    }
   }
 }

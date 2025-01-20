@@ -1,5 +1,5 @@
 import { Locator, Page } from '@playwright/test';
-import { AddCommentModel } from '../../models/comment/add-comment.model';
+import { AddCommentModel } from '@_src/models/comment/add-comment.model';
 
 export class AddNewArticleCommentView {
   commentTextArea = (): Locator => this.page.locator('textarea#body');

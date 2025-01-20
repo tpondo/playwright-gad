@@ -1,6 +1,6 @@
 import { Locator } from '@playwright/test';
-import { MainMenuComponent } from '../../components/main-menu.component';
-import { BasePage } from '../base/base.page';
+import { MainMenuComponent } from '@_src/components/main-menu.component';
+import { BasePage } from '@_src/pages/base/base.page';
 
 export class ArticlesPage extends BasePage {
   url: string = '/articles.html';

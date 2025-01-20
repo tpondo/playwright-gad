@@ -1,10 +1,10 @@
-import { test as setup, expect } from '../../fixtures/fixtures';
-import { STORAGE_STATE } from '../../playwright.config';
-import { pageTitle } from '../../src/test-data/page-title/page-title.data';
-import { testUser1 } from '../../src/test-data/user-data/user-data';
+import { test as setup, expect } from '@_fixtures/fixtures';
+import { STORAGE_STATE } from '@_pw-config';
+import { pageTitle } from '@_src/test-data/page-title/page-title.data';
+import { testUser1 } from '@_src/test-data/user-data/user-data';
 
 setup(
-  'successful login',
+  'login and save session',
   {
     tag: '@smoke',
     annotation: { type: 'documentation', description: 'GAD-R02-01' },

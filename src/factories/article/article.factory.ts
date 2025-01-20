@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker/locale/en';
-import { AddArticleModel } from '../../models/article/article.model';
+import { AddArticleModel } from '@_src/models/article/article.model';
 
 export function prepareRandomArticle(
   titleLength?: number,

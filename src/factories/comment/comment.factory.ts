@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker/locale/en';
-import { AddCommentModel } from '../../models/comment/add-comment.model';
+import { AddCommentModel } from '@_src/models/comment/add-comment.model';
 
 export function prepareRandomCommentData(
   bodyParagraphs: number = 5,
