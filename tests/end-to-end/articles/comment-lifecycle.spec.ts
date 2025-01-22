@@ -1,19 +1,20 @@
-import { test, expect } from '@_fixtures/fixtures';
+import { test, expect } from '@_fixtures/merge.fixture';
 import { prepareRandomArticle } from '@_src/factories/article/article.factory';
 import { AddArticleModel } from '@_src/models/article/article.model';
-import { ArticleComment } from '@_src/pages/articles/article.page';
+import { ArticleComment, ArticlePage } from '@_src/pages/articles/article.page';
 import { prepareRandomCommentData } from '@_src/factories/comment/comment.factory';
 import { AddCommentModel } from '@_src/models/comment/add-comment.model';
 
 test.describe('Verify article lifecycle', () => {
   let article: AddArticleModel;
-  test.beforeEach(async ({ articlesPage, addArticleView }) => {
+  let articlePage: ArticlePage;
+
+  test.beforeEach(async ({ addArticleView }) => {
     article = prepareRandomArticle();
 
-    await articlesPage.goto();
-    await articlesPage.addArticleButtonLogged().click();
-    await addArticleView.addArticle(article);
+    articlePage = await addArticleView.addArticle(article);
   });
+
   test(
     'create new comment',
     {
@@ -23,12 +24,7 @@ test.describe('Verify article lifecycle', () => {
         description: 'GAD-R05-01,GAD-R05-02',
       },
     },
-    async ({
-      articlePage,
-      addNewArticleCommentView,
-      commentPage,
-      editArticleCommentView,
-    }) => {
+    async ({ commentPage, editArticleCommentView }) => {
       let comment: AddCommentModel;
       let articleComment: ArticleComment;
       await test.step('add new comment', async () => {
@@ -36,7 +32,8 @@ test.describe('Verify article lifecycle', () => {
         articleComment = articlePage.getArticleComment(comment);
         const expectedCommentCreatedPopup: string = 'Comment was created';
 
-        await articlePage.addNewCommentButton().click();
+        const addNewArticleCommentView =
+          await articlePage.clickAddNewCommentButton();
         await addNewArticleCommentView.addNewComment(comment);
 
         await expect
@@ -86,7 +83,8 @@ test.describe('Verify article lifecycle', () => {
           secondComment = prepareRandomCommentData();
           secondArticleComment = articlePage.getArticleComment(secondComment);
 
-          await articlePage.addNewCommentButton().click();
+          const addNewArticleCommentView =
+            await articlePage.clickAddNewCommentButton();
           await addNewArticleCommentView.addNewComment(secondComment);
 
           await expect

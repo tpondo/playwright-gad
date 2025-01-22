@@ -1,25 +1,22 @@
-import { test, expect } from '@_fixtures/fixtures';
+import { test, expect } from '@_fixtures/merge.fixture';
 import { prepareRandomArticle } from '@_src/factories/article/article.factory';
 import { AddArticleModel } from '@_src/models/article/article.model';
+import { ArticlePage } from '@_src/pages/articles/article.page';
 import { pageTitle } from '@_src/test-data/page-title/page-title.data';
 
 test.describe.configure({ mode: 'serial' });
 test.describe('Verify article lifecycle', () => {
   let article: AddArticleModel;
-  test.beforeEach(async ({ articlesPage }) => {
-    await articlesPage.goto();
-  });
   test(
     'create new article',
     {
       tag: ['@e2e', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
-    async ({ addArticleView, articlesPage, articlePage }) => {
+    async ({ addArticleView }) => {
       article = prepareRandomArticle();
 
-      await articlesPage.addArticleButtonLogged().click();
-      await addArticleView.addArticle(article);
+      const articlePage: ArticlePage = await addArticleView.addArticle(article);
 
       await expect.soft(articlePage.articleTitle()).toHaveText(article.title);
       await expect
@@ -33,8 +30,8 @@ test.describe('Verify article lifecycle', () => {
       tag: ['@e2e', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-03' },
     },
-    async ({ articlesPage, articlePage }) => {
-      await articlesPage.goToArticle(article.title);
+    async ({ articlesPage }) => {
+      const articlePage = await articlesPage.goToArticle(article.title);
 
       await expect.soft(articlePage.articleTitle()).toHaveText(article.title);
       await expect
@@ -48,9 +45,11 @@ test.describe('Verify article lifecycle', () => {
       tag: ['@e2e', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-04' },
     },
-    async ({ articlePage, articlesPage }) => {
-      await articlesPage.goToArticle(article.title);
-      await articlePage.deleteArticle();
+    async ({ articlesPage }) => {
+      const articlePage: ArticlePage = await articlesPage.goToArticle(
+        article.title,
+      );
+      articlesPage = await articlePage.deleteArticle();
       await articlesPage.waitForUrlToBeLoaded();
 
       const title = await articlesPage.getTitle();
