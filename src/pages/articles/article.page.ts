@@ -1,6 +1,7 @@
 import { Locator } from '@playwright/test';
 import { BasePage } from '@_src/pages/base/base.page';
 import { AddCommentModel } from '@_src/models/comment/add-comment.model';
+import { AddNewArticleCommentView } from '@_src/views/article/add-new-article-comment.view';
 
 export interface ArticleComment {
   body: Locator;
@@ -18,6 +19,11 @@ export class ArticlePage extends BasePage {
   async deleteArticle(): Promise<void> {
     await this.acceptDialogPopup();
     await this.deleteArticleIcon().click();
+  }
+
+  async clickAddNewCommentButton(): Promise<AddNewArticleCommentView> {
+    await this.addNewCommentButton().click();
+    return new AddNewArticleCommentView(this.page);
   }
 
   getArticleComment(comment: AddCommentModel): ArticleComment {

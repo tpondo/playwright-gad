@@ -4,8 +4,8 @@ export class BasePage {
   url: string = '';
   constructor(protected page: Page) {}
 
-  async goto(): Promise<void> {
-    await this.page.goto(this.url);
+  async goto(parameters: string = ''): Promise<void> {
+    await this.page.goto(`${this.url}${parameters}`);
     await this.page.waitForLoadState();
   }
 

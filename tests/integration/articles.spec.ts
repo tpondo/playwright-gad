@@ -1,14 +1,9 @@
-import { expect, test } from '@_fixtures/fixtures';
+import { test, expect } from '@_fixtures/merge.fixture';
 import { prepareRandomArticle } from '@_src/factories/article/article.factory';
 import { AddArticleModel } from '@_src/models/article/article.model';
 
 test.describe('Verify articles', () => {
   const expectedErrorMessage: string = 'Article was not created';
-
-  test.beforeEach(async ({ articlesPage }) => {
-    await articlesPage.goto();
-    await articlesPage.addArticleButtonLogged().click();
-  });
 
   test(
     'create new article',

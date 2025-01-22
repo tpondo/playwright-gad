@@ -1,4 +1,4 @@
-import { test, expect } from '@_fixtures/fixtures';
+import { test, expect } from '@_fixtures/merge.fixture';
 import { prepareRandomArticle } from '@_src/factories/article/article.factory';
 import { AddArticleModel } from '@_src/models/article/article.model';
 import { ArticleComment } from '@_src/pages/articles/article.page';
@@ -7,11 +7,9 @@ import { AddCommentModel } from '@_src/models/comment/add-comment.model';
 
 test.describe('Verify article lifecycle', () => {
   let article: AddArticleModel;
-  test.beforeEach(async ({ articlesPage, addArticleView }) => {
+  test.beforeEach(async ({ addArticleView }) => {
     article = prepareRandomArticle();
 
-    await articlesPage.goto();
-    await articlesPage.addArticleButtonLogged().click();
     await addArticleView.addArticle(article);
   });
   test(

@@ -1,6 +1,7 @@
 import { Locator } from '@playwright/test';
 import { MainMenuComponent } from '@_src/components/main-menu.component';
 import { BasePage } from '@_src/pages/base/base.page';
+import { AddArticleView } from '@_src/views/article/add-article.view';
 
 export class ArticlesPage extends BasePage {
   url: string = '/articles.html';
@@ -17,5 +18,10 @@ export class ArticlesPage extends BasePage {
   async searchArticle(phrase: string): Promise<void> {
     await this.searchInput().fill(phrase);
     await this.searchButton().click();
+  }
+
+  async clickAddArticleButtonLogged(): Promise<AddArticleView> {
+    await this.addArticleButtonLogged().click();
+    return new AddArticleView(this.page);
   }
 }

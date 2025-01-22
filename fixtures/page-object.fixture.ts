@@ -11,7 +11,7 @@ import { ArticlePage } from '../src/pages/articles/article.page';
 import { CommentPage } from '../src/pages/comments/comment.page';
 import { EditArticleCommentView } from '../src/views/article/edit-article-comment.view';
 
-type MyType = {
+interface Pages {
   homePage: HomePage;
   articlesPage: ArticlesPage;
   commentsPage: CommentsPage;
@@ -23,29 +23,41 @@ type MyType = {
   addNewArticleCommentView: AddNewArticleCommentView;
   commentPage: CommentPage;
   editArticleCommentView: EditArticleCommentView;
-};
+}
 
-export const test = base.extend<MyType>({
+export const pageObjectTest = base.extend<Pages>({
   homePage: async ({ page }, use) => {
-    await use(new HomePage(page));
+    const homePage: HomePage = new HomePage(page);
+    await homePage.goto();
+    await use(homePage);
   },
   articlesPage: async ({ page }, use) => {
+    const articlesPage = new ArticlesPage(page);
+    await articlesPage.goto();
     await use(new ArticlesPage(page));
   },
   commentsPage: async ({ page }, use) => {
-    await use(new CommentsPage(page));
+    const commentsPage: CommentsPage = new CommentsPage(page);
+    await commentsPage.goto();
+    await use(commentsPage);
   },
   loginPage: async ({ page }, use) => {
-    await use(new LoginPage(page));
+    const loginPage: LoginPage = new LoginPage(page);
+    await loginPage.goto();
+    await use(loginPage);
   },
   welcomePage: async ({ page }, use) => {
     await use(new WelcomePage(page));
   },
   registerPage: async ({ page }, use) => {
-    await use(new RegisterPage(page));
+    const registerPage = new RegisterPage(page);
+    await registerPage.goto();
+    await use(registerPage);
   },
-  addArticleView: async ({ page }, use) => {
-    await use(new AddArticleView(page));
+  addArticleView: async ({ articlesPage }, use) => {
+    const addArticleView: AddArticleView =
+      await articlesPage.clickAddArticleButtonLogged();
+    await use(addArticleView);
   },
   articlePage: async ({ page }, use) => {
     await use(new ArticlePage(page));
@@ -60,5 +72,3 @@ export const test = base.extend<MyType>({
     await use(new EditArticleCommentView(page));
   },
 });
-
-export { expect } from '@playwright/test';

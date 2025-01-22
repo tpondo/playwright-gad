@@ -1,13 +1,13 @@
-import { test, expect } from '@_fixtures/fixtures';
+import { test, expect } from '@_fixtures/merge.fixture';
 import { prepareRandomUserData } from '@_src/factories/user/user.factory';
 import { RegisterUserModel } from '@_src/models/user/user.model';
+import { LoginPage } from '@_src/pages/login/login.page';
 import { pageTitle } from '@_src/test-data/page-title/page-title.data';
 
 test.describe('Verify register', () => {
   let registerUserData: RegisterUserModel;
-  test.beforeEach(async ({ registerPage }) => {
+  test.beforeEach(async ({}) => {
     registerUserData = prepareRandomUserData();
-    await registerPage.goto();
   });
   test(
     'register user with correct data',
@@ -18,8 +18,9 @@ test.describe('Verify register', () => {
         description: 'GAD-R03-01,GAD-R03-03',
       },
     },
-    async ({ registerPage, loginPage, welcomePage }) => {
-      await registerPage.registerUser(registerUserData);
+    async ({ registerPage, welcomePage }) => {
+      const loginPage: LoginPage =
+        await registerPage.registerUser(registerUserData);
       await loginPage.login(registerUserData);
 
       const title = await welcomePage.getTitle();
