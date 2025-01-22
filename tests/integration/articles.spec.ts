@@ -1,6 +1,7 @@
 import { test, expect } from '@_fixtures/merge.fixture';
 import { prepareRandomArticle } from '@_src/factories/article/article.factory';
 import { AddArticleModel } from '@_src/models/article/article.model';
+import { ArticlePage } from '@_src/pages/articles/article.page';
 
 test.describe('Verify articles', () => {
   const expectedErrorMessage: string = 'Article was not created';
@@ -11,9 +12,9 @@ test.describe('Verify articles', () => {
       tag: ['@integration', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
-    async ({ addArticleView, articlePage }) => {
+    async ({ addArticleView }) => {
       const article: AddArticleModel = prepareRandomArticle();
-      await addArticleView.addArticle(article);
+      const articlePage: ArticlePage = await addArticleView.addArticle(article);
 
       await expect.soft(articlePage.articleTitle()).toHaveText(article.title);
       await expect
@@ -65,10 +66,10 @@ test.describe('Verify articles', () => {
       tag: ['@integration', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-02' },
     },
-    async ({ addArticleView, articlePage }) => {
+    async ({ addArticleView }) => {
       const article: AddArticleModel = prepareRandomArticle(128);
 
-      await addArticleView.addArticle(article);
+      const articlePage: ArticlePage = await addArticleView.addArticle(article);
 
       await expect.soft(articlePage.articleTitle()).toHaveText(article.title);
       await expect
