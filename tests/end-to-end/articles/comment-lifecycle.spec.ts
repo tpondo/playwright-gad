@@ -16,7 +16,7 @@ test.describe('Verify article lifecycle', () => {
     },
     async ({ createRandomArticle }) => {
       const comment: AddCommentModel = prepareRandomCommentData();
-      const articlePage: ArticlePage = createRandomArticle;
+      const articlePage: ArticlePage = createRandomArticle.articlePage;
       const articleComment: ArticleComment =
         articlePage.getArticleComment(comment);
 
