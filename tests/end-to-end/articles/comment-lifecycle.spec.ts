@@ -1,22 +1,12 @@
 import { test, expect } from '@_fixtures/merge.fixture';
-import { prepareRandomArticle } from '@_src/factories/article/article.factory';
-import { AddArticleModel } from '@_src/models/article/article.model';
 import { ArticleComment, ArticlePage } from '@_src/pages/articles/article.page';
 import { prepareRandomCommentData } from '@_src/factories/comment/comment.factory';
 import { AddCommentModel } from '@_src/models/comment/add-comment.model';
+import { CommentPage } from '@_src/pages/comments/comment.page';
 
 test.describe('Verify article lifecycle', () => {
-  let article: AddArticleModel;
-  let articlePage: ArticlePage;
-
-  test.beforeEach(async ({ addArticleView }) => {
-    article = prepareRandomArticle();
-
-    articlePage = await addArticleView.addArticle(article);
-  });
-
   test(
-    'create new comment',
+    'operate on comments',
     {
       tag: ['@e2e', '@logged'],
       annotation: {
@@ -24,12 +14,13 @@ test.describe('Verify article lifecycle', () => {
         description: 'GAD-R05-01,GAD-R05-02',
       },
     },
-    async ({ commentPage, editArticleCommentView }) => {
-      let comment: AddCommentModel;
-      let articleComment: ArticleComment;
+    async ({ createRandomArticle }) => {
+      const comment: AddCommentModel = prepareRandomCommentData();
+      const articlePage: ArticlePage = createRandomArticle;
+      const articleComment: ArticleComment =
+        articlePage.getArticleComment(comment);
+
       await test.step('add new comment', async () => {
-        comment = prepareRandomCommentData();
-        articleComment = articlePage.getArticleComment(comment);
         const expectedCommentCreatedPopup: string = 'Comment was created';
 
         const addNewArticleCommentView =
@@ -43,8 +34,9 @@ test.describe('Verify article lifecycle', () => {
         await expect.soft(articleComment.body).toHaveText(comment.body);
       });
 
+      let commentPage: CommentPage;
       await test.step('open comment', async () => {
-        await articleComment.link.click();
+        commentPage = await articlePage.clickArticleLink(articleComment);
 
         await expect.soft(commentPage.commentBody()).toHaveText(comment.body);
       });
@@ -54,7 +46,8 @@ test.describe('Verify article lifecycle', () => {
         updateComment = prepareRandomCommentData();
         const expectedCommentUpdatedPopup: string = 'Comment was updated';
 
-        await commentPage.editCommentButton().click();
+        const editArticleCommentView =
+          await commentPage.clickEditCommentButton();
         await editArticleCommentView.updateComment(updateComment);
 
         await expect

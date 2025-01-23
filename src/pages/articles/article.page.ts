@@ -3,6 +3,7 @@ import { BasePage } from '@_src/pages/base/base.page';
 import { AddCommentModel } from '@_src/models/comment/add-comment.model';
 import { AddNewArticleCommentView } from '@_src/views/article/add-new-article-comment.view';
 import { ArticlesPage } from '@_src/pages/articles/articles.page';
+import { CommentPage } from '@_src/pages/comments/comment.page';
 
 export interface ArticleComment {
   body: Locator;
@@ -21,6 +22,11 @@ export class ArticlePage extends BasePage {
     await this.acceptDialogPopup();
     await this.deleteArticleIcon().click();
     return new ArticlesPage(this.page);
+  }
+
+  async clickArticleLink(articleComment: ArticleComment): Promise<CommentPage> {
+    await articleComment.link.click();
+    return new CommentPage(this.page);
   }
 
   async clickAddNewCommentButton(): Promise<AddNewArticleCommentView> {
