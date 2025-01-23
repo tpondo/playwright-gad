@@ -1,5 +1,4 @@
 import { test, expect } from '@_fixtures/merge.fixture';
-import { prepareRandomArticle } from '@_src/factories/article/article.factory';
 import { AddArticleModel } from '@_src/models/article/article.model';
 import { ArticlePage } from '@_src/pages/articles/article.page';
 import { pageTitle } from '@_src/test-data/page-title/page-title.data';
@@ -13,10 +12,10 @@ test.describe('Verify article lifecycle', () => {
       tag: ['@e2e', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
-    async ({ addArticleView }) => {
-      article = prepareRandomArticle();
+    async ({ createRandomArticle }) => {
+      article = createRandomArticle.articleData;
 
-      const articlePage: ArticlePage = await addArticleView.addArticle(article);
+      const articlePage: ArticlePage = createRandomArticle.articlePage;
 
       await expect.soft(articlePage.articleTitle()).toHaveText(article.title);
       await expect
