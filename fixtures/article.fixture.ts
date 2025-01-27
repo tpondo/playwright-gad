@@ -2,7 +2,6 @@ import { prepareRandomArticle } from '@_src/factories/article/article.factory';
 import { AddArticleModel } from '@_src/models/article/article.model';
 import { ArticlePage } from '@_src/pages/articles/article.page';
 import { pageObjectTest } from '@_fixtures/page-object.fixture';
-//import { AddArticleView } from '@_src/views/article/add-article.view';
 
 export interface ArticleCreationContext {
   articlePage: ArticlePage;
