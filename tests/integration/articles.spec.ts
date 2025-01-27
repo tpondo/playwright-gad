@@ -1,4 +1,3 @@
-/* eslint-disable playwright/expect-expect */
 import { ArticleCreationContext } from '@_fixtures/article.fixture';
 import { test, expect } from '@_fixtures/merge.fixture';
 import { RESPONSE_TIMEOUT } from '@_pw-config';
