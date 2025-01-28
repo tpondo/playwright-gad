@@ -2,7 +2,8 @@ import { ArticleCreationContext } from '@_fixtures/article.fixture';
 import { test, expect } from '@_fixtures/merge.fixture';
 import { prepareRandomArticle } from '@_src/factories/article/article.factory';
 import { AddArticleModel } from '@_src/models/article/article.model';
-import { ArticlePage } from '@_src/pages/articles/article.page';
+import { waitForResponse } from '@_src/utils/api/response.api';
+import { Response } from '@playwright/test';
 
 test.describe('Verify articles', () => {
   const expectedErrorMessage: string = 'Article was not created';
@@ -13,14 +14,15 @@ test.describe('Verify articles', () => {
       tag: ['@integration', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
-    async ({ createRandomArticle }) => {
-      const article: AddArticleModel = createRandomArticle.articleData;
-      const articlePage: ArticlePage = createRandomArticle.articlePage;
+    async ({ randomArticle }) => {
+      const articleContext: ArticleCreationContext = await randomArticle();
 
-      await expect.soft(articlePage.articleTitle()).toHaveText(article.title);
       await expect
-        .soft(articlePage.articleBody())
-        .toHaveText(article.body, { useInnerText: true });
+        .soft(articleContext.articlePage.articleTitle())
+        .toHaveText(articleContext.articleData.title);
+      await expect
+        .soft(articleContext.articlePage.articleBody())
+        .toHaveText(articleContext.articleData.body, { useInnerText: true });
     },
   );
 
@@ -30,16 +32,22 @@ test.describe('Verify articles', () => {
       tag: ['@integration', '@logged'],
       annotation: { type: 'documentation', description: 'GAD-R04-01' },
     },
-    async ({ addArticleView }) => {
+    async ({ addArticleView, page }) => {
+      const expectedResponseCode: number = 422;
       const article: AddArticleModel = prepareRandomArticle();
+
+      const responsePromise = waitForResponse(page, '/api/articles');
 
       await addArticleView.bodyTextarea().fill(article.body);
       await addArticleView.saveButton().click();
+
+      const response = await responsePromise;
 
       await expect
         .soft(addArticleView.alertPopup())
         .toHaveText(expectedErrorMessage);
       await expect.soft(addArticleView.addNewEntryHeader()).toBeVisible();
+      expect.soft(response.status()).toBe(expectedResponseCode);
     },
   );
 
@@ -76,6 +84,25 @@ test.describe('Verify articles', () => {
       await expect
         .soft(articleContext.articlePage.articleBody())
         .toHaveText(articleContext.articleData.body, { useInnerText: true });
+    },
+  );
+
+  test(
+    'should return created article from API',
+    {
+      tag: ['@integration', '@logged'],
+      annotation: { type: 'documentation', description: 'GAD-R07-04' },
+    },
+    async ({ page, randomArticle }) => {
+      const responsePromise = waitForResponse(page, '/api/articles', 'GET');
+      const articleContext: ArticleCreationContext = await randomArticle();
+      const response: Response = await responsePromise;
+      const body = await response.json();
+
+      await expect
+        .soft(articleContext.articlePage.articleTitle())
+        .toHaveText(articleContext.articleData.title);
+      expect.soft(body.title).toBe(articleContext.articleData.title);
     },
   );
 });
