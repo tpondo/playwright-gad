@@ -5,7 +5,7 @@ test.describe('Verify search component for articles', () => {
   test('go button should fetch articles', async ({ articlesPage, page }) => {
     await expect(articlesPage.searchButton()).toBeInViewport();
 
-    const responsePromise = waitForResponse(page, '/api/articles*');
+    const responsePromise = waitForResponse(page, '/api/articles');
 
     await articlesPage.searchButton().click();
 

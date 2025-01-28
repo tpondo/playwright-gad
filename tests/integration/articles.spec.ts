@@ -1,6 +1,5 @@
 import { ArticleCreationContext } from '@_fixtures/article.fixture';
 import { test, expect } from '@_fixtures/merge.fixture';
-import { RESPONSE_TIMEOUT } from '@_pw-config';
 import { prepareRandomArticle } from '@_src/factories/article/article.factory';
 import { AddArticleModel } from '@_src/models/article/article.model';
 import { waitForResponse } from '@_src/utils/api/response.api';
@@ -95,15 +94,7 @@ test.describe('Verify articles', () => {
       annotation: { type: 'documentation', description: 'GAD-R07-04' },
     },
     async ({ page, randomArticle }) => {
-      const responsePromise = page.waitForResponse(
-        (response) => {
-          return (
-            response.url().includes('/api/articles') &&
-            response.request().method() == 'GET'
-          );
-        },
-        { timeout: RESPONSE_TIMEOUT },
-      );
+      const responsePromise = waitForResponse(page, '/api/articles', 'GET');
       const articleContext: ArticleCreationContext = await randomArticle();
       const response: Response = await responsePromise;
       const body = await response.json();
