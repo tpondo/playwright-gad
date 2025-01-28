@@ -1,16 +1,41 @@
 import { test, expect } from '@_fixtures/merge.fixture';
 import { APIResponse } from '@playwright/test';
 
-test.describe('Verify articles API endpoint', () => {
-  test(
-    'GET articles returns status code 200',
-    { tag: '@smoke-api' },
-    async ({ request }) => {
+test(
+  'GET articles should return an object with required fields',
+  {
+    tag: '@smoke-api',
+    annotation: { type: 'documentation', description: 'GAD-R08-01' },
+  },
+  async ({ request }) => {
+    const articlesUrl: string = '/api/articles';
+    const response: APIResponse = await request.get(articlesUrl);
+
+    await test.step('GET articles returns status code 200', async () => {
       const statusCode: number = 200;
 
-      const responsePromise: APIResponse = await request.get('/api/articles');
+      expect(response.status()).toBe(statusCode);
+    });
 
-      expect(responsePromise.status()).toBe(statusCode);
-    },
-  );
-});
+    const responseJson = await response.json();
+    await test.step('GET articles should return at least one article object', async () => {
+      expect.soft(responseJson.length).toBeGreaterThan(0);
+    });
+
+    const expectedRequiredFields: Array<string> = [
+      'id',
+      'user_id',
+      'title',
+      'date',
+      'body',
+      'image',
+    ];
+    const article = responseJson[0];
+
+    expectedRequiredFields.forEach(async (value) => {
+      await test.step(`GET articles should return an object with required field: ${value}`, async () => {
+        expect.soft(article).toHaveProperty(value);
+      });
+    });
+  },
+);
