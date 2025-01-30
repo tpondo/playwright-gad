@@ -2,7 +2,7 @@ import { test, expect } from '@_fixtures/merge.fixture';
 import { APIResponse } from '@playwright/test';
 
 test(
-  'GET articles should return an object with required fields',
+  'Verify articles GET endpoint',
   {
     tag: '@smoke-api',
     annotation: { type: 'documentation', description: 'GAD-R08-01' },
